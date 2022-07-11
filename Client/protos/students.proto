@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "StudentsClient";
+
+package student;
+
+
+service RemoteStudent {
+  rpc GetStudentInfo (StudentDataModel) returns (StudentFindModel);
+  rpc InsertStudent (StudentFindModel) returns (Reply);
+  rpc UpdateStudent (StudentFindModel) returns (Reply);
+  rpc DeleteStudent (StudentDataModel) returns (Reply);
+  rpc RetrieveAllStudents (Empty) returns (StudentList);
+}
+
+message Empty {}
+
+message StudentList {
+  repeated StudentFindModel items = 1;
+}
+
+message Reply {
+  string result = 1;
+  bool isOk = 2;
+}
+
+
+message StudentDataModel {
+  int32 studentId = 1;
+}
+
+
+message StudentFindModel {
+  int32 studentId = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string Email = 4;
+}
+    
